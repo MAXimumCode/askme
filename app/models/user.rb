@@ -45,6 +45,6 @@ class User < ApplicationRecord
   end
 
   def make_downcase
-    username&.downcase!
+    username.downcase!
   end
 end
