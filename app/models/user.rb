@@ -20,7 +20,6 @@ class User < ApplicationRecord
   validates :email,
             format: { with: REGEXP_FOR_EMAIL }
   validates :username,
-            allow_blank: false,
             length: { maximum: MAX_LENGTH },
             format: { with: REGEXP_FOR_USERNAME }
   validates :password,
