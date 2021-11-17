@@ -2,11 +2,14 @@ require 'openssl'
 
 class User < ApplicationRecord
   ITERATIONS = 20000
-  DIGEST = OpenSSL::Digest::SHA256.new
+  DIGEST = OpenSSL::Digest.new('SHA256')
 
   has_many :questions
   validates :email, :username, presence: true
   validates :email, :username, uniqueness: true
+  validates :email, format: { with: /(\A([a-z]*\s*)*<*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})>*\Z)/i }
+  validates_length_of :username, maximum: 40, allow_blank: false
+  validates :username, format: { with: /\A[a-zA-Z0-9_]+\Z/ }
 
   attr_accessor :password
 
