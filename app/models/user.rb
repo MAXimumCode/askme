@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, :username, uniqueness: true
   validates :email, format: { with: /(\A([a-z]*\s*)*<*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})>*\Z)/i }
   validates_length_of :username, maximum: 40, allow_blank: false
-  validates :username, format: { with: /\A[a-zA-Z0-9_]+\Z/ }
+  validates :username, format: { with: /\A\w+\z/ }
 
   attr_accessor :password
 
