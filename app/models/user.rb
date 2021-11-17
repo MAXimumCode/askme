@@ -1,35 +1,50 @@
 require 'openssl'
 
 class User < ApplicationRecord
-  ITERATIONS = 20000
+  ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest.new('SHA256')
-
-  has_many :questions
-  validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true
-  validates :email, format: { with: /(\A([a-z]*\s*)*<*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})>*\Z)/i }
-  validates_length_of :username, maximum: 40, allow_blank: false
-  validates :username, format: { with: /\A\w+\z/ }
+  REGEXP_FOR_EMAIL = /(\A([a-z]*\s*)*<*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})>*\Z)/i
+  REGEXP_FOR_USERNAME = /\A\w+\z/
+  MAX_LENGTH = 40
 
   attr_accessor :password
-
-  validates_presence_of :password, on: :create
-  validates_confirmation_of :password
 
   before_validation :make_downcase
   before_save :encrypt_password
 
+  has_many :questions
+  validates :email, :username,
+            presence: true
+  validates :email, :username,
+            uniqueness: true
+  validates :email,
+            format: { with: REGEXP_FOR_EMAIL }
+  validates :username,
+            allow_blank: false,
+            length: { maximum: MAX_LENGTH },
+            format: { with: REGEXP_FOR_USERNAME }
+  validates :password,
+            presence: true,
+            on: :create
+  validates :password,
+            confirmation: true
+
   def self.authenticate(email, password)
     user = find_by(email: email)
-    if user.present? && user.password_hash == User.hash_to_string(OpenSSL::PKCS5.pbkdf2_hmac(password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST))
-      user
-    else
-      nil
-    end
+
+    return unless user.present?
+
+    password_hash = User.hash_to_string(
+      OpenSSL::PKCS5.pbkdf2_hmac(password, user.password_salt, ITERATIONS, DIGEST.length, DIGEST)
+    )
+
+    return unless user.password_hash == password_hash
+
+    user
   end
 
   def self.hash_to_string(password_hash)
-    password_hash.unpack('H*')[0]
+    password_hash.unpack1('H*')
   end
 
   private
@@ -46,5 +61,6 @@ class User < ApplicationRecord
 
   def make_downcase
     username.downcase!
+    email.downcase!
   end
 end
