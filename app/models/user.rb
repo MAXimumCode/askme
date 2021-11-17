@@ -1,9 +1,9 @@
 require 'openssl'
+require 'uri'
 
 class User < ApplicationRecord
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest.new('SHA256')
-  REGEXP_FOR_EMAIL = /(\A([a-z]*\s*)*<*([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})>*\Z)/i
   REGEXP_FOR_USERNAME = /\A\w+\z/
   MAX_LENGTH = 40
 
@@ -18,7 +18,7 @@ class User < ApplicationRecord
   validates :email, :username,
             uniqueness: true
   validates :email,
-            format: { with: REGEXP_FOR_EMAIL }
+            format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :username,
             length: { maximum: MAX_LENGTH },
             format: { with: REGEXP_FOR_USERNAME }
