@@ -9,8 +9,7 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
-  before_validation :make_downcase,
-                    on: :create
+  before_validation :make_downcase
   before_save :encrypt_password
 
   has_many :questions
@@ -60,7 +59,7 @@ class User < ApplicationRecord
   end
 
   def make_downcase
-    username.downcase!
-    email.downcase!
+    username&.downcase!
+    email&.downcase!
   end
 end
