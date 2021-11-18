@@ -9,7 +9,8 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
-  before_validation :make_downcase
+  before_validation :make_downcase,
+                    on: :create
   before_save :encrypt_password
 
   has_many :questions
