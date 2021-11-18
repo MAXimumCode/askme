@@ -6,3 +6,10 @@
 import Rails from "@rails/ujs"
 
 Rails.start()
+
+$(function(){
+    $('#ask-button').click(function(){
+        $('#ask-form').slideToggle(300);
+        return false;
+    });
+});

@@ -1,6 +1,49 @@
+<div class="user-header text-center">
+  <h1 class="title-medium">
+    <%= @user.name %>
+  </h1>
 
-<h1>
+  <div class="user-image-div">
+    <%= image_tag user_avatar(@user), class: 'user-image', alt: '[Фото]' %>
+  </div>
 
-  <%= @hello %>
+  <h2 class="title-small buffer-both">
+    @<%= @user.username %>
+  </h2>
 
-</h1>
+  <div class="user-ask-button container text-center">
+    <%= link_to "Спроси меня", '', class: 'button button-light', id: 'ask-button' %>
+  </div>
+</div>
+
+
+
+
+<div class="user-question-form-div column-1-4 column-1-4-right" id='ask-form'>
+  <div class="user-question-form buffer-both">
+    <div class="form">
+      <%= form_for @new_question do |f| %>
+        <%= f.hidden_field :user_id %>
+
+        <div class="form-field">
+          <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
+          <%= f.text_area :text, class: 'form-textarea' %>
+        </div>
+
+        <div class="form-action">
+          <%= submit_tag 'Задать вопрос', class: 'button button-small button-dark' %>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+
+<div class="column-3-4">
+  <div class="user-questions buffer-both">
+    <div class="questions-list">
+      <% @questions.each do |question| %>
+        <%= render partial: 'questions/question', object: question %>
+      <% end %>
+    </div>
+  </div>
+</div>

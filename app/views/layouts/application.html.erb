@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Askme</title>
+    <meta charset="UTF-8">
+    <title>Хорошие вопросы</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +12,17 @@
   </head>
 
   <body>
-    <%= yield %>
+
+    <div class="header">
+      <div class="container">
+        <div class="header-logo">
+          <h1 class="header-title"><%= link_to "Хорошие вопросы", root_path %></h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <%= yield %>
+    </div>
   </body>
 </html>

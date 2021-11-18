@@ -9,10 +9,10 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
+  has_many :questions
+
   before_validation :make_downcase
   before_save :encrypt_password
-
-  has_many :questions
   validates :email, :username,
             presence: true
   validates :email, :username,
