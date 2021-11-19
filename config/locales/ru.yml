@@ -1,0 +1,21 @@
+ru:
+  users:
+    show:
+      count:
+        zero: "вопросов"
+        one: "вопрос"
+        few: "вопроса"
+        many: "вопросов"
+        other: "вопроса"
+      count_answers:
+        zero: "ответов"
+        one: "ответ"
+        few: "ответа"
+        many: "ответов"
+        other: "ответа"
+      count_unanswered:
+        zero: "без ответа"
+        one: "без ответа"
+        few: "без ответа"
+        many: "без ответа"
+        other: "без ответа"

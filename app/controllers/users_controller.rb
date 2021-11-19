@@ -30,9 +30,14 @@ class UsersController < ApplicationController
 
     @questions = [
       Question.new(text: 'Как дела?', created_at: Date.parse('19.11.2021')),
-      Question.new(text: 'В чем смысл жизни?', created_at: Date.parse('19.11.2021'))
+      Question.new(text: 'В чем смысл жизни?', answer: 'Фиг его', created_at: Date.parse('19.11.2021')),
+      Question.new(text: 'Еще вопрос', created_at: Date.parse('19.11.2021')),
+      Question.new(text: 'И еще вопрос', created_at: Date.parse('19.11.2021'))
     ]
 
     @new_question = Question.new
+    @questions_count = @questions.count
+    @answers_count = @questions.count(&:answer)
+    @unanswered_count = @questions_count - @answers_count
   end
 end
