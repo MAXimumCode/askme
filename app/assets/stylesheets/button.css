@@ -14,7 +14,7 @@
   color: #fff;
 }
 
-.button-dark:hover  {
+.button:hover  {
     transition: all 0.3s ease-in-out;
     color: #black;
     -webkit-text-shadow: 2px 2px 2px #000;

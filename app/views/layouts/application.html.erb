@@ -1,28 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>Хорошие вопросы</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <meta charset="UTF-8"/>
+  <title>Хорошие вопросы</title>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%#= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div class="header">
+  <div class="container">
+    <div class="header-logo">
+      <h1 class="header-title"><%= link_to "Хорошие вопросы", root_path %></h1>
+    </div>
 
-    <%= stylesheet_link_tag 'application', media: 'all' %>
-    <%= javascript_pack_tag 'application' %>
-  </head>
+    <div class="header-nav">
+      <% if current_user %>
+        <%= link_to "@#{current_user.username}", user_path(current_user) %> |
+        <%= link_to 'Выйти', log_out_path %>
+      <% else %>
+        <%= link_to 'Зарегистрироваться', sign_up_path,
+                    class: 'button button-light button-small' %>
+        <%= link_to 'Войти', log_in_path,
+                    class: 'button button-light button-small' %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
-  <body>
-
-    <div class="header">
-      <div class="container">
-        <div class="header-logo">
-          <h1 class="header-title"><%= link_to "Хорошие вопросы", root_path %></h1>
-        </div>
+<div class="content">
+  <div class="container">
+    <%# Выводим сообщение об ошибке или уведомление для пользователя. %>
+    <%# Если в объеккте flash есть что-то, выводим содержимое на страницу, %>
+    <%# если нет, игнорируем этот блок. %>
+    <% if flash.any? %>
+      <div class="content-wrapper buffer-both">
+        <% flash.each do |name, message| %>
+          <%= content_tag :div, message, class: "flash-#{name}" %>
+        <% end %>
       </div>
-    </div>
+    <% end %>
 
-    <div class="content">
-      <%= yield %>
-    </div>
-  </body>
+    <%= yield %>
+  </div>
+</div>
+</body>
 </html>
