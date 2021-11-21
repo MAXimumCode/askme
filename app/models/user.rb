@@ -64,10 +64,4 @@ class User < ApplicationRecord
     username&.downcase!
     email&.downcase!
   end
-
-  def valid_url?(uri)
-    @avatar_url = URI.parse(uri) && uri.host
-  rescue URI::InvalidURIError
-    false
-  end
 end
