@@ -27,6 +27,8 @@ class User < ApplicationRecord
             on: :create
   validates :password,
             confirmation: true
+  validates :avatar_url,
+            format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }, allow_nil: true
 
   def self.authenticate(email, password)
     user = find_by(email: email)
@@ -61,5 +63,11 @@ class User < ApplicationRecord
   def make_downcase
     username&.downcase!
     email&.downcase!
+  end
+
+  def valid_url?(uri)
+    @avatar_url = URI.parse(uri) && uri.host
+  rescue URI::InvalidURIError
+    false
   end
 end
