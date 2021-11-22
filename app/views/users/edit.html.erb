@@ -29,6 +29,11 @@
         <%= f.text_field :avatar_url, class: 'form-text-field' %>
       </div>
 
+      <div class="form-field">
+        <%= f.label 'Цвет фона', class: 'form-label' %>
+        <%= f.color_field :color, class: 'form-text-field' %>
+      </div>
+
       <div class="buffer-top-large buffer-bottom">
         Если не хотите менять пароль — оставьте эти поля пустыми!
       </div>
@@ -47,5 +52,13 @@
         <%= f.submit 'Сохранить', class: 'button button-dark button-small' %>
       </div>
     <% end %>
+
+    <div class="button-delete">
+      <span title="Удалить аккаунт">
+      <%= link_to fa_icon('trash'), user_path(@user), method: :delete,
+                  data: {confirm: 'Вы точно хотите удалить аккаунт?'},
+                  class: 'fa-2x button-trash' %>
+      </span>
+    </div>
   </div>
 </div>

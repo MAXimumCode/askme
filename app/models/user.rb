@@ -28,7 +28,8 @@ class User < ApplicationRecord
   validates :password,
             confirmation: true
   validates :avatar_url,
-            format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) }, allow_nil: true
+            format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) },
+            allow_blank: true
 
   def self.authenticate(email, password)
     user = find_by(email: email)

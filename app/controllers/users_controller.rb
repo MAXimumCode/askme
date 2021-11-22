@@ -25,8 +25,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
 
@@ -37,12 +36,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    redirect_to root_url, notice: 'Пользователь удален!'
+    User.destroy(session[:user_id])
+  end
+
   def show
     @questions = @user.questions.order(created_at: :desc)
     @new_question = @user.questions.build
     @questions_count = @questions.count
     @answers_count = @questions.count(&:answer)
     @unanswered_count = @questions_count - @answers_count
+
   end
 
   private
@@ -56,6 +61,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :name, :username, :avatar_url)
+    params.require(:user).permit(:email, :password, :password_confirmation, :name, :username, :avatar_url, :color)
   end
 end
