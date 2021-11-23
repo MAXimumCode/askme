@@ -15,19 +15,9 @@
       <%= l(question.created_at, format: :short) %>
     </div>
 
-    <% if question.author.present? && question.author != current_user %>
-      <div class="question-author">
-        <%= link_to "От: @#{question.author.username}", user_path(question.author) %>
-      </div>
-    <% elsif question.author.present? && question.author == current_user %>
-      <div class="question-author">
-        <%= "От: @#{question.author.username}" %>
-      </div>
-    <% else %>
-      <div class="question-author">
-        <%= "Анонимус IP: #{question.ip}" %>
-      </div>
-    <% end %>
+    <div class="question-author">
+      <%= author_info(question.author) %>
+    </div>
   </div>
 
   <% if question.user == current_user %>
