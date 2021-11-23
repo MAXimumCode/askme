@@ -5,6 +5,8 @@ class User < ApplicationRecord
   ITERATIONS = 20_000
   DIGEST = OpenSSL::Digest.new('SHA256')
   REGEXP_FOR_USERNAME = /\A\w+\z/
+  REGEXP_FOR_COLOR = /\A#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})\z/i
+  DEFAULT_COLOR = '#005a55'.freeze
   MAX_LENGTH = 40
 
   attr_accessor :password
@@ -30,6 +32,8 @@ class User < ApplicationRecord
   validates :avatar_url,
             format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]) },
             allow_blank: true
+  validates :color,
+            format: { with: REGEXP_FOR_COLOR }
 
   def self.authenticate(email, password)
     user = find_by(email: email)
@@ -43,6 +47,14 @@ class User < ApplicationRecord
     return unless user.password_hash == password_hash
 
     user
+  end
+
+  def color
+    if self[:color].present?
+      self[:color]
+    else
+      DEFAULT_COLOR
+    end
   end
 
   def self.hash_to_string(password_hash)
