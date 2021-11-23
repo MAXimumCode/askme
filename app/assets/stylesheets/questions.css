@@ -31,6 +31,11 @@
   font-size: 12px;
 }
 
+.question-author {
+    color: #a0b0a1;
+    font-size: 13px;
+}
+
 .question-actions {
   font-size: 20px;
   border-top: 1px solid #D9E6E5;
