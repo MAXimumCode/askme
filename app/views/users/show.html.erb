@@ -42,13 +42,16 @@
         <%= f.hidden_field :user_id %>
 
         <div class="form-field">
-          <%= f.label "Ваш вопрос для @#{@user.username}", class: 'form-label' %>
+          <%= f.label "Ваш вопрос для @#{@user.username}",
+                      class: 'form-label' %>
           <%= f.text_area :text, class: 'form-textarea' %>
+
         </div>
 
         <div class="form-action">
           <%= submit_tag 'Задать вопрос', class: 'button button-small button-dark' %>
         </div>
+        <small class="text-small"> * У Анонимусов будет виден IP</small>
         <% end %>
     </div>
   </div>

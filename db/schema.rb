@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_161759) do
+ActiveRecord::Schema.define(version: 2021_11_24_175311) do
 
   create_table "questions", force: :cascade do |t|
     t.string "text"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2021_11_24_161759) do
     t.integer "user_id", null: false
     t.integer "author_id"
     t.string "ip"
+    t.index ["author_id"], name: "index_questions_on_author_id"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 

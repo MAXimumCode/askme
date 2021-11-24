@@ -6,7 +6,6 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest.new('SHA256')
   REGEXP_FOR_USERNAME = /\A\w+\z/
   REGEXP_FOR_COLOR = /\A#\h{3}{1,2}\z/
-  DEFAULT_COLOR = '#005a55'.freeze
   MAX_LENGTH = 40
 
   attr_accessor :password
