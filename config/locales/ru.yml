@@ -1,4 +1,13 @@
 ru:
+  activerecord:
+    attributes:
+      user:
+        username: Имя пользователя
+        name: Имя
+        avatar_url: URL аватарки
+        color: Цвет фона
+        password: Пароль
+        password_confirmation: Подтверждение пароля
   users:
     show:
       count:
