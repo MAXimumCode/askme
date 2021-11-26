@@ -5,7 +5,7 @@ class QuestionsController < ApplicationController
   def edit; end
 
   def create
-    @question = Question.new(question_params)
+    @question = Question.new(question_create_params)
     @question.author = current_user if current_user
     @question.ip = request.remote_ip
 
@@ -41,15 +41,11 @@ class QuestionsController < ApplicationController
     reject_user unless @question.user == current_user
   end
 
-  def question_params
-    if current_user.present? && params[:question][:user_id].to_i == current_user.id
-      params.require(:question).permit(:user_id, :text, :answer)
-    else
-      params.require(:question).permit(:user_id, :text)
-    end
+  def question_create_params
+    params.require(:question).permit(:user_id, :text)
   end
 
   def question_update_params
-    params.require(:question).permit( :text, :answer)
+    params.require(:question).permit(:answer)
   end
 end

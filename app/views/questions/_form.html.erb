@@ -14,7 +14,7 @@
 
     <div class="form-field">
       <%= f.label :text, 'Вопрос', class: 'form-label' %>
-      <%= f.text_area :text, class: 'form-textarea' %>
+      <%= f.text_area :text, class: 'form-textarea', :disabled => true %>
     </div>
 
     <% if current_user.present? && current_user == @question.user %>
