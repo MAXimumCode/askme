@@ -1,0 +1,1 @@
+TAG_REGEXP = /#[[:word:]-]+/

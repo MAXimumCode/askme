@@ -4,6 +4,5 @@ class Tag < ApplicationRecord
 
   validates :name, presence: true
   validates :name, uniqueness: true
-  validates :name, format: { with: /#[[:word:]-]+/,
-                             message: 'Неправильный формат тега.'}
+  validates :name, format: { with: TAG_REGEXP }
 end

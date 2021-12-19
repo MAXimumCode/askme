@@ -9,12 +9,12 @@ class Question < ApplicationRecord
   validates :text,
             length: { maximum: 255 }
 
-  after_save :find_tags
+  after_commit :find_tags
 
   def find_tags
     QuestionTag.where(question: id).destroy_all
 
-    ("#{text}!#{answer}").downcase.scan(/#[[:word:]-]+/i).uniq.each do |tag_name|
+    "#{text}#{answer}".downcase.scan(TAG_REGEXP).uniq.each do |tag_name|
       tags << Tag.where(name: tag_name).first_or_create!
     end
   end
