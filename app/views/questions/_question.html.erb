@@ -13,6 +13,10 @@
 
     <div class="question-date">
       <%= l(question.created_at, format: :short) %>
+      <% tags = load_tags(question) %>
+      <% tags.each do |tag| %>
+        <%= link_to tag.name, tag_path(tag) %>
+      <% end %>
     </div>
 
     <div class="question-author">

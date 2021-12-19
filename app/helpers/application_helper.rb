@@ -10,4 +10,8 @@ module ApplicationHelper
   def fa_icon(icon_class)
     content_tag 'span', '', class: "fa fa-#{icon_class}"
   end
+
+  def load_tags(question)
+    Tag.joins(:questions).where('question_tags.question_id = ?', question)
+  end
 end

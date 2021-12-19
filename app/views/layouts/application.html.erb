@@ -32,9 +32,6 @@
 
 <div class="content">
   <div class="container">
-    <%# Выводим сообщение об ошибке или уведомление для пользователя. %>
-    <%# Если в объеккте flash есть что-то, выводим содержимое на страницу, %>
-    <%# если нет, игнорируем этот блок. %>
     <% if flash.any? %>
       <div class="content-wrapper buffer-both">
         <% flash.each do |name, message| %>
