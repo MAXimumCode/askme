@@ -9,7 +9,7 @@ class Question < ApplicationRecord
   validates :text,
             length: { maximum: 255 }
 
-  after_commit :find_tags
+  after_commit :find_tags, on: %i[create update]
 
   def find_tags
     QuestionTag.where(question: id).destroy_all
