@@ -1,4 +1,8 @@
 ru:
+  recaptcha:
+    errors:
+      verification_failed: 'reCAPTCHA некорректна или ты робот, попробуй еще раз '
+      recaptcha_unreachable: 'reCAPTCHA - ошибка сервера. Попробуй еще раз'
   activerecord:
     attributes:
       user:
