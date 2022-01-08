@@ -19,11 +19,11 @@
     <div class="header-nav">
       <% if current_user %>
         <%= link_to "@#{current_user.username}", user_path(current_user) %> |
-        <%= link_to 'Выйти', log_out_path %>
+        <%= link_to 'Выйти', session_path, data: { method: :delete } %>
       <% else %>
-        <%= link_to 'Зарегистрироваться', sign_up_path,
+        <%= link_to 'Зарегистрироваться', new_user_path,
                     class: 'button button-light button-small' %>
-        <%= link_to 'Войти', log_in_path,
+        <%= link_to 'Войти', new_session_path,
                     class: 'button button-light button-small' %>
       <% end %>
     </div>

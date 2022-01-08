@@ -9,6 +9,8 @@ gem 'uglifier'
 gem 'puma', '~> 5.0'
 gem 'webpacker', '~> 5.0'
 gem 'rails-i18n', '~> 6.0.0'
+gem "recaptcha"
+gem 'dotenv-rails'
 
 group :production do
   gem 'pg'

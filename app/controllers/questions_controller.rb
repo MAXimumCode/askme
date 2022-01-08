@@ -9,7 +9,7 @@ class QuestionsController < ApplicationController
     @question.author = current_user
     @question.ip = request.remote_ip
 
-    if @question.save
+    if check_captcha(@question) && @question.save
       redirect_to user_path(@question.user), notice: 'Вопрос задан.'
     else
       render :edit
@@ -47,5 +47,13 @@ class QuestionsController < ApplicationController
 
   def question_update_params
     params.require(:question).permit(:answer)
+  end
+
+  def check_captcha(model)
+    if current_user.present?
+      true
+    else
+      verify_recaptcha(model: model)
+    end
   end
 end
