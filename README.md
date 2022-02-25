@@ -1,24 +1,32 @@
-# README
+## IASKYOU
+#### Это программа клон `Ask.fm` написаная на Ruby on Rails. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+О Ask.Fm: https://ru.wikipedia.org/wiki/ASKfm
 
-Things you may want to cover:
+#### Ссылка
+https://iaskyou.herokuapp.com/
 
-* Ruby version
+### Установка:
+```ssh
+git clone git@github.com:MAXimumCode/askme.git
+cd askme
+bundle install
+bundle exec rails db:migrate
+```
 
-* System dependencies
+### Необходимо сконфигурировать ENV ключи для вашего окружения
+#### REcaptha https://www.google.com/recaptcha
+```
+RECAPTCHA_ASKME_PRIVATE_KEY 
+RECAPTCHA_ASKME_PUBLIC_KEY
+SECRET_KEY_BASE
+```
 
-* Configuration
+### Запуск сервера
+```ssh
+bundle exec rails s
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Автор
+[Максим Козаев](https://maximumcode.github.io/CV/)
+ 
